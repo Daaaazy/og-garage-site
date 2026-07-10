@@ -113,7 +113,7 @@ export default function Home() {
             Ready for a cleaner garage door experience?
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-black/62">
-            Email oggaragedoortoronto@gmail.com or call 647-505-8764 to start a clear quote with OG Garage Door.
+            Email oggaragedoortoronto@gmail.com or call 647-505-8764 / 437-340-4408 to start a clear quote with OG Garage Door.
           </p>
           <Link
             href="/contact"
@@ -127,6 +127,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 
