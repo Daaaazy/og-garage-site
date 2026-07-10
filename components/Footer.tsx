@@ -30,8 +30,8 @@ export function Footer() {
           <p className="font-semibold text-black">Contact OG Garage Door</p>
           <p className="mt-3 leading-6">Email: oggaragedoortoronto@gmail.com</p>
           <p className="leading-6">Tel: 647-505-8764</p>
-          <p className="mt-3 leading-6">29 Edinborough Ct</p>
-          <p className="leading-6">York, ON M6N 2E9</p>
+          <p className="mt-3 leading-6">4978 Yonge St</p>
+          <p className="leading-6">North York, ON M2N 7G8</p>
         </div>
         <div>
           <p className="font-semibold text-black">Instagram</p>
@@ -52,4 +52,5 @@ export function Footer() {
     </footer>
   );
 }
+
 

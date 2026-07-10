@@ -25,7 +25,7 @@ function ContactPageContent() {
           <div className="mt-10 space-y-3 border-t border-black pt-6 text-sm leading-6 text-black/65">
             <p>Email: oggaragedoortoronto@gmail.com</p>
             <p>Tel: 647-505-8764</p>
-            <p>29 Edinborough Ct York, ON M6N 2E9</p>
+            <p>4978 Yonge St, North York, ON M2N 7G8</p>
           </div>
         </div>
 
@@ -110,4 +110,5 @@ export default function ContactPage() {
     </Suspense>
   );
 }
+
 

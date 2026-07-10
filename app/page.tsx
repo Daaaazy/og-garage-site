@@ -11,7 +11,7 @@ const advantages = [
 export default function Home() {
   return (
     <div className="bg-white">
-      <section className="relative isolate aspect-[1452/695] overflow-hidden bg-black text-white">
+      <section className="relative isolate min-h-[560px] overflow-hidden bg-black text-white sm:aspect-[1452/695] sm:min-h-0">
         <Image
           src="/images/double/IMG_79231.jpg"
           alt="OG Garage Door modern garage door installation"
@@ -22,17 +22,17 @@ export default function Home() {
         />
         <div className="pointer-events-none absolute inset-0 bg-black/55" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.52))]" />
-        <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col items-center justify-center px-5 py-16 text-center sm:h-full sm:min-h-0 sm:px-8 sm:py-16">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
             OG Garage Door
           </p>
-          <h1 className="mt-6 max-w-5xl text-5xl font-semibold leading-[0.95] tracking-normal sm:text-7xl lg:text-8xl">
+          <h1 className="mt-5 max-w-5xl text-4xl font-semibold leading-[1.02] tracking-normal sm:mt-6 sm:text-7xl sm:leading-[0.95] lg:text-8xl">
             Modern garage doors built for Canadian homes.
           </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+          <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:mt-8 sm:text-xl sm:leading-8 sm:text-white/70">
             OG Garage Door sources garage doors from leading manufacturers, delivering strong insulation performance designed for Canadian winters while elevating your home exterior.
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex w-full max-w-xs flex-col gap-3 sm:mt-10 sm:w-auto sm:max-w-none sm:flex-row">
             <Link
               href="/contact"
               className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-black transition hover:bg-white/85"
@@ -127,6 +127,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 
