@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -95,6 +95,26 @@ function GalleryGrid({
   );
 }
 
+function ChevronIcon({ direction }: { direction: "previous" | "next" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d={direction === "previous" ? "M15 5L8 12L15 19" : "M9 5L16 12L9 19"}
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function Lightbox({
   images,
   activeIndex,
@@ -112,6 +132,25 @@ function Lightbox({
 }) {
   const activeImage = images[activeIndex];
   const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+
+      if (event.key === "ArrowLeft") {
+        onPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        onNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, onNext, onPrevious]);
 
   const handleTouchEnd = (clientX: number) => {
     if (touchStart === null) return;
@@ -136,34 +175,36 @@ function Lightbox({
   return (
     <div
       className="fixed inset-0 z-[100] bg-black/92 text-white"
+      onClick={onClose}
       onTouchStart={(event) => setTouchStart(event.changedTouches[0]?.clientX ?? null)}
       onTouchEnd={(event) => handleTouchEnd(event.changedTouches[0]?.clientX ?? 0)}
     >
       <button
         type="button"
-        onClick={onClose}
-        className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-2xl leading-none transition hover:bg-white/20"
-        aria-label="Close image viewer"
-      >
-        x
-      </button>
-      <button
-        type="button"
-        onClick={onPrevious}
-        className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl leading-none transition hover:bg-white/20 sm:left-6"
+        onClick={(event) => {
+          event.stopPropagation();
+          onPrevious();
+        }}
+        className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:left-6"
         aria-label="Previous image"
       >
-        {"<"}
+        <ChevronIcon direction="previous" />
       </button>
       <button
         type="button"
-        onClick={onNext}
-        className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl leading-none transition hover:bg-white/20 sm:right-6"
+        onClick={(event) => {
+          event.stopPropagation();
+          onNext();
+        }}
+        className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-6"
         aria-label="Next image"
       >
-        {">"}
+        <ChevronIcon direction="next" />
       </button>
-      <div className="relative h-full w-full px-6 py-16 sm:px-20">
+      <div
+        className="relative h-full w-full px-6 py-16 sm:px-20"
+        onClick={(event) => event.stopPropagation()}
+      >
         <Image
           src={activeImage}
           alt={`${title} large sample ${activeIndex + 1} by OG Garage Door`}
@@ -173,13 +214,12 @@ function Lightbox({
           priority
         />
       </div>
-      <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-sm font-medium text-white/65">
+      <p className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 text-sm font-medium text-white/65">
         {activeIndex + 1} / {images.length}
       </p>
     </div>
   );
 }
-
 function GalleryView({
   singleImages,
   doubleImages
@@ -239,3 +279,4 @@ export function GalleryClient(props: { singleImages: string[]; doubleImages: str
     </Suspense>
   );
 }
+
