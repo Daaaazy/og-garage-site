@@ -201,17 +201,13 @@ function Lightbox({
       >
         <ChevronIcon direction="next" />
       </button>
-      <div
-        className="relative h-full w-full px-6 py-16 sm:px-20"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <Image
+      <div className="flex h-full w-full items-center justify-center px-6 py-16 sm:px-20">
+        <img
           src={activeImage}
           alt={`${title} large sample ${activeIndex + 1} by OG Garage Door`}
-          fill
-          sizes="100vw"
-          className="object-contain p-6 sm:p-12"
-          priority
+          className="max-h-full max-w-full object-contain"
+          draggable={false}
+          onClick={(event) => event.stopPropagation()}
         />
       </div>
       <p className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 text-sm font-medium text-white/65">
@@ -279,4 +275,5 @@ export function GalleryClient(props: { singleImages: string[]; doubleImages: str
     </Suspense>
   );
 }
+
 
